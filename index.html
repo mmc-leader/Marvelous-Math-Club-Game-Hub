@@ -144,3 +144,46 @@
         topic: "geometry",
         url: "https://toytheater.com/shapes/",
         img: "https://toytheater.com/wp-content/uploads/ShapeBuilder200.png"
+      },
+      {
+        title: "Area & Perimeter",
+        grade: ["3", "4", "5"],
+        topic: "measurement",
+        url: "https://www.mathplayground.com/area_perimeter.html",
+        img: "https://www.mathplayground.com/pg_area_perimeter.png"
+      }
+    ];
+
+    const gameGrid = document.getElementById('gameGrid');
+    const gradeFilter = document.getElementById('gradeFilter');
+    const topicFilter = document.getElementById('topicFilter');
+
+    function renderGames() {
+      const selectedGrade = gradeFilter.value;
+      const selectedTopic = topicFilter.value;
+
+      const filtered = games.filter(game => {
+        const matchGrade = selectedGrade === "all" || game.grade.includes(selectedGrade);
+        const matchTopic = selectedTopic === "all" || game.topic === selectedTopic;
+        return matchGrade && matchTopic;
+      });
+
+      gameGrid.innerHTML = filtered.length
+        ? filtered.map(game => `
+            <div class="game-card">
+              <img src="${game.img}" alt="${game.title}">
+              <h3>${game.title}</h3>
+              <a href="${game.url}" target="_blank">Play</a>
+            </div>
+          `).join('')
+        : '<p style="text-align:center; grid-column: 1 / -1;">No games found for your filters.</p>';
+    }
+
+    gradeFilter.addEventListener('change', renderGames);
+    topicFilter.addEventListener('change', renderGames);
+
+    // Initial render
+    renderGames();
+  </script>
+</body>
+</html>
