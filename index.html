@@ -5,70 +5,83 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Math Club Game Hub</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #fdf6e3;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background: #2aa198;
-      color: white;
-      text-align: center;
-      padding: 1rem 0;
-    }
-    h1 {
-      margin: 0;
-    }
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      margin: 1rem;
-    }
-    .filters select {
-      font-size: 1rem;
-      padding: 0.5rem;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-    .game-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
-      padding: 1rem;
-    }
-    .game-card {
-      background: white;
-      border: 2px solid #ccc;
-      border-radius: 12px;
-      padding: 1rem;
-      text-align: center;
-      box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-      transition: transform 0.2s ease;
-    }
-    .game-card:hover {
-      transform: scale(1.03);
-    }
-    .game-card img {
-      width: 100%;
-      height: 150px;
-      object-fit: contain;
-      margin-bottom: 0.5rem;
-    }
-    .game-card a {
-      display: inline-block;
-      margin-top: 0.5rem;
-      background: #268bd2;
-      color: white;
-      padding: 0.5rem 1rem;
-      text-decoration: none;
-      border-radius: 6px;
-    }
-    .game-card a:hover {
-      background: #1c6fa5;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+
+body {
+  font-family: 'Comic Neue', cursive;
+  background: #e6f7ff;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: #007acc;
+  color: white;
+  text-align: center;
+  padding: 1.2rem 0;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+.filters select {
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #aaa;
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.game-card {
+  background: white;
+  border: 2px solid #b3d7ff;
+  border-radius: 16px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.game-card:hover {
+  transform: scale(1.03);
+}
+
+.game-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.game-card a {
+  display: inline-block;
+  margin-top: 0.5rem;
+  background: #00bcd4;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.game-card a:hover {
+  background: #0097a7;
+}
   </style>
 </head>
 <body>
