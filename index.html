@@ -6,81 +6,141 @@
   <title>Math Club Game Hub</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background: #fdf6e3;
-      color: #333;
       margin: 0;
       padding: 0;
     }
     header {
       background: #2aa198;
       color: white;
-      padding: 20px;
       text-align: center;
+      padding: 1rem 0;
     }
-    main {
-      padding: 20px;
+    h1 {
+      margin: 0;
     }
-    section {
-      margin-bottom: 40px;
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1rem;
     }
-    h2 {
-      color: #268bd2;
+    .filters select {
+      font-size: 1rem;
+      padding: 0.5rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
     }
-    ul {
-      list-style: none;
-      padding-left: 0;
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
     }
-    li {
-      margin: 10px 0;
+    .game-card {
+      background: white;
+      border: 2px solid #ccc;
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
     }
-    a {
-      text-decoration: none;
-      color: #586e75;
-      background: #eee;
-      padding: 10px 15px;
-      border-radius: 5px;
+    .game-card:hover {
+      transform: scale(1.03);
+    }
+    .game-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: contain;
+      margin-bottom: 0.5rem;
+    }
+    .game-card a {
       display: inline-block;
+      margin-top: 0.5rem;
+      background: #268bd2;
+      color: white;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      border-radius: 6px;
     }
-    a:hover {
-      background: #ccc;
+    .game-card a:hover {
+      background: #1c6fa5;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Math Club Game Hub</h1>
-    <p>Fun, focused math games for K–5 students</p>
+    <p>Explore fun, distraction-free math games by grade and topic!</p>
   </header>
-  <main>
-    <section>
-      <h2>Counting & Number Sense</h2>
-      <ul>
-        <li><a href="https://toytheater.com/counting/" target="_blank">Toy Theater: Counting</a></li>
-        <li><a href="https://www.coolmath4kids.com/manipulatives/ten-frame" target="_blank">Ten Frame Practice</a></li>
-      </ul>
-    </section>
-    <section>
-      <h2>Addition & Subtraction</h2>
-      <ul>
-        <li><a href="https://www.mathplayground.com/ASB_PenguinJump.html" target="_blank">Penguin Jump</a></li>
-        <li><a href="https://www.arcademics.com/games/alien-addition" target="_blank">Alien Addition</a></li>
-      </ul>
-    </section>
-    <section>
-      <h2>Multiplication & Division</h2>
-      <ul>
-        <li><a href="https://www.arcademics.com/games/meteor-multiplication" target="_blank">Meteor Multiplication</a></li>
-        <li><a href="https://www.mathplayground.com/ASB_DuckyRace.html" target="_blank">Ducky Race</a></li>
-      </ul>
-    </section>
-    <section>
-      <h2>Geometry & Measurement</h2>
-      <ul>
-        <li><a href="https://toytheater.com/shapes/" target="_blank">Shape Builder</a></li>
-        <li><a href="https://www.mathplayground.com/area_perimeter.html" target="_blank">Area and Perimeter</a></li>
-      </ul>
-    </section>
-  </main>
-</body>
-</html>
+
+  <div class="filters">
+    <select id="gradeFilter">
+      <option value="all">All Grades</option>
+      <option value="K">Kindergarten</option>
+      <option value="1">Grade 1</option>
+      <option value="2">Grade 2</option>
+      <option value="3">Grade 3</option>
+      <option value="4">Grade 4</option>
+      <option value="5">Grade 5</option>
+    </select>
+
+    <select id="topicFilter">
+      <option value="all">All Topics</option>
+      <option value="counting">Counting</option>
+      <option value="addition">Addition & Subtraction</option>
+      <option value="multiplication">Multiplication & Division</option>
+      <option value="fractions">Fractions</option>
+      <option value="geometry">Geometry</option>
+      <option value="measurement">Measurement</option>
+    </select>
+  </div>
+
+  <div class="game-grid" id="gameGrid"></div>
+
+  <script>
+    const games = [
+      {
+        title: "Toy Theater: Counting",
+        grade: ["K", "1"],
+        topic: "counting",
+        url: "https://toytheater.com/counting/",
+        img: "https://toytheater.com/wp-content/uploads/CountingCaterpillar200.png"
+      },
+      {
+        title: "Alien Addition",
+        grade: ["1", "2"],
+        topic: "addition",
+        url: "https://www.arcademics.com/games/alien-addition",
+        img: "https://www.arcademics.com/assets/img/games/alien-addition.png"
+      },
+      {
+        title: "Penguin Jump",
+        grade: ["2", "3"],
+        topic: "addition",
+        url: "https://www.mathplayground.com/ASB_PenguinJump.html",
+        img: "https://www.mathplayground.com/pg_penguin_jump.png"
+      },
+      {
+        title: "Meteor Multiplication",
+        grade: ["3", "4"],
+        topic: "multiplication",
+        url: "https://www.arcademics.com/games/meteor-multiplication",
+        img: "https://www.arcademics.com/assets/img/games/meteor-multiplication.png"
+      },
+      {
+        title: "Ducky Race",
+        grade: ["4", "5"],
+        topic: "multiplication",
+        url: "https://www.mathplayground.com/ASB_DuckyRace.html",
+        img: "https://www.mathplayground.com/pg_ducky_race.png"
+      },
+      {
+        title: "Shape Builder",
+        grade: ["K", "1", "2"],
+        topic: "geometry",
+        url: "https://toytheater.com/shapes/",
+        img: "https://toytheater.com/wp-content/uploads/ShapeBuilder200.png"
