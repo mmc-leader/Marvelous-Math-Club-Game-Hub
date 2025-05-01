@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Math Club Game Hub</title>
+  <title>Marvelous Math Club Game Hub</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
 
@@ -214,13 +214,14 @@ h1 {
       });
 
       gameGrid.innerHTML = filtered.length
-        ? filtered.map(game => `
-            <div class="game-card">
-              <img src="${game.img}" alt="${game.title}">
-              <h3>${game.title}</h3>
-              <a href="${game.url}" target="_blank">Play</a>
-            </div>
-          `).join('')
+  ? filtered.map(game => `
+      <div class="game-card">
+        <img src="${game.img}" alt="${game.title}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/201/201818.png'; this.onerror=null;">
+        <h3>${game.title}</h3>
+        <a href="${game.url}" target="_blank">Play</a>
+      </div>
+    `).join('')
+
         : '<p style="text-align:center; grid-column: 1 / -1;">No games found for your filters.</p>';
     }
 
