@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Marvelous Math Club Game Hub</title>
-  <script src="https://kit.fontawesome.com/a2e0e6b41c.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Fredoka:wght@400;600&display=swap');
 
@@ -150,56 +150,43 @@ header {
 
   <script>
     const games = [
-      {
-        title: "Toy Theater: Counting",
-        grade: ["K", "1"],
-        topic: "counting",
-        url: "https://toytheater.com/counting/",
-        img: "https://toytheater.com/wp-content/uploads/CountingCaterpillar200.png"
-      },
-      {
-        title: "Alien Addition",
-        grade: ["1", "2"],
-        topic: "addition",
-        url: "https://www.arcademics.com/games/alien-addition",
-        img: "https://www.arcademics.com/assets/img/games/alien-addition.png"
-      },
-      {
-        title: "Penguin Jump",
-        grade: ["2", "3"],
-        topic: "addition",
-        url: "https://www.mathplayground.com/ASB_PenguinJump.html",
-        img: "https://www.mathplayground.com/pg_penguin_jump.png"
-      },
-      {
-        title: "Meteor Multiplication",
-        grade: ["3", "4"],
-        topic: "multiplication",
-        url: "https://www.arcademics.com/games/meteor-multiplication",
-        img: "https://www.arcademics.com/assets/img/games/meteor-multiplication.png"
-      },
-      {
-        title: "Ducky Race",
-        grade: ["4", "5"],
-        topic: "multiplication",
-        url: "https://www.mathplayground.com/ASB_DuckyRace.html",
-        img: "https://www.mathplayground.com/pg_ducky_race.png"
-      },
-      {
-        title: "Shape Builder",
-        grade: ["K", "1", "2"],
-        topic: "geometry",
-        url: "https://toytheater.com/shapes/",
-        img: "https://toytheater.com/wp-content/uploads/ShapeBuilder200.png"
-      },
-      {
-        title: "Area & Perimeter",
-        grade: ["3", "4", "5"],
-        topic: "measurement",
-        url: "https://www.mathplayground.com/area_perimeter.html",
-        img: "https://www.mathplayground.com/pg_area_perimeter.png"
-      }
-    ];
+  {
+    title: "Rocket Addition",
+    url: "https://www.mathplayground.com/rocket_rounding.html",
+    img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f522.png", // Keypad
+    grade: "1",
+    topic: "Addition"
+  },
+  {
+    title: "Fraction Pizza Party",
+    url: "https://www.splashlearn.com/fraction-games",
+    img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f355.png", // Pizza
+    grade: "3",
+    topic: "Fractions"
+  },
+  {
+    title: "Multiplication Galaxy",
+    url: "https://www.mathplayground.com/space_multiplication.html",
+    img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f680.png", // Rocket
+    grade: "4",
+    topic: "Multiplication"
+  },
+  {
+    title: "Place Value Challenge",
+    url: "https://www.abcya.com/games/base-ten-bingo",
+    img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f522.png", // Number input
+    grade: "2",
+    topic: "Place Value"
+  },
+  {
+    title: "Division Dive",
+    url: "https://www.coolmathgames.com/0-math-lines",
+    img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f41f.png", // Fish
+    grade: "5",
+    topic: "Division"
+  }
+];
+
 
     const gameGrid = document.getElementById('gameGrid');
     const gradeFilter = document.getElementById('gradeFilter');
@@ -223,6 +210,7 @@ header {
         <a href="${game.url}" target="_blank">
   <i class="fas fa-gamepad" style="margin-right: 6px;"></i>Play
 </a>
+
       </div>
     `).join('')
 
