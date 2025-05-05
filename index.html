@@ -2,260 +2,144 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Marvelous Math Club Game Hub</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Math Club Game Hub</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Fredoka:wght@400;600&display=swap');
-
-
-body {
-  font-family: 'Comic Neue', 'Fredoka', cursive;
-  background: #e6f7ff;
-  margin: 0;
-  padding: 0;
-}
-
-header {
-  background: #007acc;
-  color: white;
-  text-align: center;
-  padding: 1.2rem 0;
-}
-
-`  {
-  margin: 0;
-  font-size: 2.5rem;
-}
-
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-  margin: 1rem;
-}
-
-.filters select {
-  font-size: 1rem;
-  padding: 0.5rem;
-  border-radius: 8px;
-  border: 1px solid #aaa;
-}
-
-.game-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  padding: 1rem;
-}
-
-.game-card {
-  background: white;
-  border: 2px solid #b3d7ff;
-  border-radius: 16px;
-  padding: 1rem;
-  text-align: center;
-  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
-}
-
-.game-card:hover {
-  transform: scale(1.03);
-}
-
-.game-card img {
-  width: 100%;
-  height: 150px;
-  object-fit: contain;
-  margin-bottom: 0.5rem;
-}
-
-.game-card a {
-  display: inline-block;
-  margin-top: 0.5rem;
-  background: #00bcd4;
-  color: white;
-  padding: 0.5rem 1rem;
-  text-decoration: none;
-  border-radius: 6px;
-}
-
-.game-card a:hover {
-  background: #0097a7;
-}
-
-@media (max-width: 600px) {
-  header {
-    padding: 1rem 0.5rem;
-  }
-
-  h1 {
-    font-size: 2rem;
-  }
-
-  .filters {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .filters select {
-    width: 90%;
-    max-width: 300px;
-    font-size: 1.1rem;
-    padding: 0.6rem;
-  }
-
-  .game-card {
-    padding: 1rem 0.5rem;
-  }
-
-  .game-card a {
-    font-size: 1.1rem;
-    padding: 0.6rem 1.2rem;
-  }
-}
-
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 1rem;
+      background-color: #f8f9fa;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .grade-section {
+      margin: 2rem 0;
+    }
+    .grade-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #2980b9;
+      border-bottom: 2px solid #2980b9;
+    }
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .game-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      padding: 1rem;
+      transition: transform 0.2s;
+    }
+    .game-card:hover {
+      transform: scale(1.03);
+    }
+    .game-card img {
+      width: 64px;
+      height: 64px;
+    }
+    .game-card h3 {
+      margin: 0.5rem 0 0;
+      font-size: 1.1rem;
+      color: #333;
+    }
+    .surprise-btn {
+      display: block;
+      margin: 1rem auto 2rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .surprise-btn:hover {
+      background-color: #219150;
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Marvelous Math Club Game Hub</h1>
-    <p>Explore fun, distraction-free math games by grade and topic!</p>
-  </header>
-
-  <div class="filters">
-    <select id="gradeFilter">
-      <option value="all">All Grades</option>
-      <option value="K">Kindergarten</option>
-      <option value="1">Grade 1</option>
-      <option value="2">Grade 2</option>
-      <option value="3">Grade 3</option>
-      <option value="4">Grade 4</option>
-      <option value="5">Grade 5</option>
-    </select>
-
-    <select id="topicFilter">
-      <option value="all">All Topics</option>
-      <option value="counting">Counting</option>
-      <option value="addition">Addition & Subtraction</option>
-      <option value="multiplication">Multiplication & Division</option>
-      <option value="fractions">Fractions</option>
-      <option value="geometry">Geometry</option>
-      <option value="measurement">Measurement</option>
-    </select>
-  </div>
-
-  <div class="game-grid" id="gameGrid"></div>
+  <h1>Math Club Game Hub</h1>
+  <button class="surprise-btn" onclick="surpriseMe()">🎲 Surprise Me!</button>
+  <div id="games-container"></div>
 
   <script>
     const games = [
-  {
-    title: "Counting Fish",
-    url: "https://www.abcya.com/games/counting_fish",
-    img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f41f.png", // Fish
-    grade: "K",
-    topic: "Counting"
-  },
-  {
-    title: "Number Bingo",
-    url: "https://www.abcya.com/games/number_bingo",
-    img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f3b2.png", // Game die
-    grade: "1",
-    topic: "Number Recognition"
-  },
-  {
-    title: "Base Ten Bingo",
-    url: "https://www.abcya.com/games/base-ten-bingo",
-    img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f522.png", // Keypad
-    grade: "2",
-    topic: "Place Value"
-  },
-  {
-    title: "Math Monster Multiplication",
-    url: "https://www.mathplayground.com/math_monster_multiplication.html",
-    img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f47b.png", // Monster
-    grade: "3",
-    topic: "Multiplication"
-  },
-  {
-    title: "Pizza Fractions",
-    url: "https://www.abcya.com/games/pizza_fractions",
-    img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f355.png", // Pizza
-    grade: "3",
-    topic: "Fractions"
-  },
-  {
-    title: "Math Lines Division",
-    url: "https://www.coolmathgames.com/0-math-lines",
-    img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/2796.png", // Division minus
-    grade: "4",
-    topic: "Division"
-  },
-  {
-    title: "Rounding Rockets",
-    url: "https://www.mathplayground.com/rocket_rounding.html",
-    img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f680.png", // Rocket
-    grade: "3",
-    topic: "Rounding"
-  },
-  {
-    title: "Math Mahjong: Addition",
-    url: "https://www.abcya.com/games/math_mahjong",
-    img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f004.png", // Mahjong tile
-    grade: "2",
-    topic: "Addition"
-  },
-  {
-    title: "Factor Pair Up",
-    url: "https://www.mathplayground.com/factor_pair_up.html",
-    img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/267b.png", // Loop
-    grade: "4",
-    topic: "Factors"
-  },
-  {
-    title: "Math Surpass",
-    url: "https://www.mathplayground.com/ASB_MathSurpass.html",
-    img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f3c6.png", // Trophy
-    grade: "5",
-    topic: "Mixed Operations"
-  }
-];
+      // Kindergarten
+      { title: "Counting Fish", url: "https://www.abcya.com/games/counting_fish", img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f41f.png", grade: "K", topic: "Counting" },
+      { title: "Number Match", url: "https://www.abcya.com/games/number_match", img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f522.png", grade: "K", topic: "Number Recognition" },
+      { title: "Feed the Monster", url: "https://www.abcya.com/games/feed_the_monster", img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f47e.png", grade: "K", topic: "Counting & Shapes" },
 
+      // Grade 1
+      { title: "Number Bingo", url: "https://www.abcya.com/games/number_bingo", img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f3b2.png", grade: "1", topic: "Number Recognition" },
+      { title: "Fuzz Bugs Counting", url: "https://www.abcya.com/games/fuzz_bugs_counting_sorting", img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f41e.png", grade: "1", topic: "Counting & Sorting" },
+      { title: "Tug Team Addition", url: "https://www.mathplayground.com/ASB_TugTeamAddition.html", img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f91d.png", grade: "1", topic: "Addition" },
 
-    const gameGrid = document.getElementById('gameGrid');
-    const gradeFilter = document.getElementById('gradeFilter');
-    const topicFilter = document.getElementById('topicFilter');
+      // Grade 2
+      { title: "Base Ten Bingo", url: "https://www.abcya.com/games/base-ten-bingo", img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f522.png", grade: "2", topic: "Place Value" },
+      { title: "Math Mahjong: Addition", url: "https://www.abcya.com/games/math_mahjong", img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f004.png", grade: "2", topic: "Addition" },
+      { title: "Telling Time", url: "https://www.abcya.com/games/telling_time", img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/23f0.png", grade: "2", topic: "Time" },
+
+      // Grade 3
+      { title: "Pizza Fractions", url: "https://www.abcya.com/games/pizza_fractions", img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f355.png", grade: "3", topic: "Fractions" },
+      { title: "Rounding Rockets", url: "https://www.mathplayground.com/rocket_rounding.html", img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f680.png", grade: "3", topic: "Rounding" },
+      { title: "Math Monster Multiplication", url: "https://www.mathplayground.com/math_monster_multiplication.html", img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f47b.png", grade: "3", topic: "Multiplication" },
+
+      // Grade 4
+      { title: "Factor Pair Up", url: "https://www.mathplayground.com/factor_pair_up.html", img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/267b.png", grade: "4", topic: "Factors" },
+      { title: "Math Lines Division", url: "https://www.coolmathgames.com/0-math-lines", img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/2796.png", grade: "4", topic: "Division" },
+      { title: "Integer Warp", url: "https://www.arcademics.com/games/integers", img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f3c3.png", grade: "4", topic: "Negative Numbers" },
+
+      // Grade 5
+      { title: "Math Surpass", url: "https://www.mathplayground.com/ASB_MathSurpass.html", img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f3c6.png", grade: "5", topic: "Mixed Operations" },
+      { title: "Decimals of the Caribbean", url: "https://www.arcademics.com/games/decimal-cards", img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f3f3.png", grade: "5", topic: "Decimals" },
+      { title: "Battleship Numberline", url: "https://www.mathsnacks.com/battleship-numberline.html", img: "https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/1f6a2.png", grade: "5", topic: "Number Lines" }
+    ];
 
     function renderGames() {
-      const selectedGrade = gradeFilter.value;
-      const selectedTopic = topicFilter.value;
+      const container = document.getElementById("games-container");
+      container.innerHTML = "";
+      const grouped = games.reduce((acc, game) => {
+        acc[game.grade] = acc[game.grade] || [];
+        acc[game.grade].push(game);
+        return acc;
+      }, {});
 
-      const filtered = games.filter(game => {
-        const matchGrade = selectedGrade === "all" || game.grade.includes(selectedGrade);
-        const matchTopic = selectedTopic === "all" || game.topic === selectedTopic;
-        return matchGrade && matchTopic;
-      });
+      for (const grade in grouped) {
+        const section = document.createElement("div");
+        section.className = "grade-section";
+        section.innerHTML = `<div class="grade-title">Grade ${grade}</div>`;
+        const grid = document.createElement("div");
+        grid.className = "game-grid";
 
-      gameGrid.innerHTML = filtered.length
-  ? filtered.map(game => `
-      <div class="game-card">
-        <img src="${game.img}" alt="${game.title}" onerror="this.src='https://raw.githubusercontent.com/mmc-leader/Marvelous-Math-Club-Game-Hub/refs/heads/main/math.png'; this.onerror=null;">
-        <h3>${game.title}</h3>
-        <a href="${game.url}" target="_blank">
-  <i class="fas fa-gamepad" style="margin-right: 6px;"></i>Play
-</a>
+        grouped[grade].forEach((game) => {
+          const card = document.createElement("div");
+          card.className = "game-card";
+          card.innerHTML = `
+            <a href="${game.url}" target="_blank">
+              <img src="${game.img}" alt="${game.topic}" />
+              <h3>${game.title}</h3>
+            </a>`;
+          grid.appendChild(card);
+        });
 
-      </div>
-    `).join('')
-
-        : '<p style="text-align:center; grid-column: 1 / -1;">No games found for your filters.</p>';
+        section.appendChild(grid);
+        container.appendChild(section);
+      }
     }
 
-    gradeFilter.addEventListener('change', renderGames);
-    topicFilter.addEventListener('change', renderGames);
+    function surpriseMe() {
+      const randomGame = games[Math.floor(Math.random() * games.length)];
+      window.open(randomGame.url, "_blank");
+    }
 
-    // Initial render
     renderGames();
   </script>
 </body>
